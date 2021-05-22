@@ -36,31 +36,49 @@ class Owner
     Dog.all.select {|dog| dog.owner == self}
   end
 
-  def buy_cat(cat)
+  def buy_cat(name)
+    Cat.new(name,self)
   end
 
-  def buy_dog(dog)
+  def buy_dog(name)
+    Dog.new(name,self)
   end
 
   def walk_dogs
-    if Dog.all.select {|dog| dog.owner == self}
+    if dogs
       Dog.all.each{|dog| dog.mood = "happy"}
     end
   end
 
   def feed_cats
-    if Cat.all.select {|cat| cat.owner == self}
-    Cat.all.each{|dog| dog.mood = "happy"}
+    if cats
+      Cat.all.each{|cat| cat.mood = "happy"}
     end
   end
 
   def sell_pets
+    if cats
+      Cat.all.each do |cat| 
+        cat.mood = "nervous"
+        cat.clear
+      end
+    elsif dogs
+      Dog.all.each do |dog| 
+        dog.mood = "nervous"
+        dog.clear
+      end
+    end
   end
 
   def list_pets
-    list = []
-    list << cats
-    list << dogs
+    # binding.pry
+    cat_count = 0
+    dog_count = 0
+    if cats && dogs
+      Cat.all.each{|cat| cat_count += 1}
+      Dog.all.each{|dog| dog_count += 1}
+    end
+    "I have #{cat_count} dog(s), and #{dog_count} cat(s)."
   end  
 
 
