@@ -58,28 +58,16 @@ class Owner
 
   #WIP
   def sell_pets
-    Cat.all.each do |cat| 
+    cats.each do |cat| 
       cat.mood = "nervous"
+      cat.owner = nil
     end
-    Dog.all.each do |dog| 
+
+    dogs.each do |dog| 
       dog.mood = "nervous"
+      dog.owner = nil
     end
 
-
-    # self.cats.count = 0
-    # self.dogs.count = 0
-   
-    # if cats
-    #   Cat.all.each do |cat| 
-    #     cat.mood = "nervous"
-    #     cat.clear
-    #   end
-    # elsif dogs
-    #   Dog.all.each do |dog| 
-    #     dog.mood = "nervous"
-    #     dog.clear
-    #   end
-    # end
   end
 
   #WIP
@@ -87,9 +75,17 @@ class Owner
     # binding.pry
     cat_count = 0
     dog_count = 0
-    if cats && dogs
-      Cat.all.each{|cat| cat_count += 1}
-      Dog.all.each{|dog| dog_count += 1}
+    # if cats && dogs
+    #   Cat.all.each{|cat| cat_count += 1}
+    #   Dog.all.each{|dog| dog_count += 1}
+    # end
+
+    cats.each do |cat| 
+      cat_count =  cat_count + 1
+    end
+
+    dogs.each do |dog| 
+      dog_count = dog_count + 1
     end
 
     "I have #{cat_count} dog(s), and #{dog_count} cat(s)."
